@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>The Magical Cat Button</title>
+</head>
+
+<body>
+  <button id="cat-button">magical cat button</button>
+  <div id="images">
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // Event listener for our cat-button
+   
+
+      // Storing our giphy API URL for a random cat image
+/*       const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://mlemapi.p.rapidapi.com/randommlem?orientation=square",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "7a664664b9msh9ab60b50670f375p1962c5jsncba19bed257a",
+		"x-rapidapi-host": "mlemapi.p.rapidapi.com"
+	}
+}; */
+
+
+const myArray = []
+
+const catPicFunction = () => {
+
+
+const settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://mlemapi.p.rapidapi.com/randommlem?orientation=landscape",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "7a664664b9msh9ab60b50670f375p1962c5jsncba19bed257a",
+		"x-rapidapi-host": "mlemapi.p.rapidapi.com"
+	}
+};
+
+$.ajax(settings).done(function (response) {
+	console.log(response);
+})
+
+
+        // After the data from the AJAX request comes back
+        .then(function(response) {
+          
+
+   
+          if(myArray.includes(response.id)){
+            catPicFunction();
+          } else {
+            myArray.push(response.id);
+          
+          // Saving the image_original_url property
+          var imageUrl = response.url;
+
+          // Creating and storing an image tag
+          var catImage = $("<img>");
+
+          // Setting the catImage src attribute to imageUrl
+          catImage.attr("src", imageUrl);
+          catImage.attr("alt", "cat image");
+          catImage.attr("height", "335");
+          catImage.attr("width", "600");
+          // Prepending the catImage to the images div
+          $("#images").prepend(catImage);
+          }
+        });
+      
+    };
+
+
+    $("#cat-button").on("click", catPicFunction);
+
+
+  </script>
+</body>
+
+</html>
